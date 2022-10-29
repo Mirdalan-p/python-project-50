@@ -2,7 +2,8 @@ import argparse
 import json
 
 
-parser = argparse.ArgumentParser(description='Compares two configuration files and shows a difference.')
+parser = argparse.ArgumentParser(
+    description='Compares two configuration files and shows a difference.')
 parser.add_argument('-f FORMAT', dest='--format FORMAT', default=json,
                     help="set format of output")
 
