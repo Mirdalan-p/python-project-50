@@ -1,4 +1,4 @@
-from gendiff import generate_diff
+from make_diff import generate_diff
 
 
 
