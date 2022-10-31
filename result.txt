@@ -1,0 +1,39 @@
+poetry run pytest -vv
+============================= test session starts ==============================
+platform linux -- Python 3.8.10, pytest-7.2.0, pluggy-1.0.0 -- /home/mirdalan/.cache/pypoetry/virtualenvs/hexlet-code-QdCEIhem-py3.8/bin/python
+cachedir: .pytest_cache
+rootdir: /home/mirdalan/hexlet-projects/python-project-50
+collecting ... collected 1 item
+
+tests/test_gendiff.py::test_generate_diff_with_lesson_data FAILED        [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_generate_diff_with_lesson_data ______________________
+
+    def test_generate_diff_with_lesson_data():
+>       assert generate_diff('tests/fixtures/file1.json', 'tests/fixtures/file2.json') == \
+               get_result('tests/fixtures/output_1.txt')
+E       AssertionError: assert '{\n  - follow: False\n  - host: hexlet.io\n  + host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: True\n}' == '{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}'
+E           {
+E         -   - follow: false
+E         ?             ^
+E         +   - follow: False
+E         ?             ^
+E         -     host: hexlet.io
+E         ?   ^
+E         +   - host: hexlet.io
+E         ?   ^
+E         +   + host: hexlet.io
+E             - proxy: 123.234.53.22
+E             - timeout: 50
+E             + timeout: 20
+E         -   + verbose: true
+E         ?              ^
+E         +   + verbose: True
+E         ?              ^
+E           }
+
+tests/test_gendiff.py:10: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_gendiff.py::test_generate_diff_with_lesson_data - Assertion...
+============================== 1 failed in 0.02s ===============================
