@@ -28,4 +28,4 @@ def generate_diff(file_path1, file_path2):
     return result + '}'
 
 if __name__ == '__main__':
-    print(generate_diff('hexlet-projects/python-project-50/tests/fixtures/file1.json', 'hexlet-projects/python-project-50/tests/fixtures/file2.json'))
+    print(generate_diff('tests/fixtures/file1.json', 'tests/fixtures/file2.json'))
