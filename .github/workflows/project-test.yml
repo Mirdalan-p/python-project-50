@@ -30,6 +30,6 @@ jobs:
           make test-coverage
       - name: sending reporter
         env:
-          GITHUB_TOKEN: ${{ secrets.СС_TEST_REPORTER_ID }}
+          GITHUB_TOKEN: ${{ secrets.CC_TEST_REPORTER_ID }}
         run: |
           ./cc-test-reporter after-build -r "$GITHUB_TOKEN"
