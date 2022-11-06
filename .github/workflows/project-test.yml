@@ -20,14 +20,12 @@ jobs:
       - name: Run linter
         run: |
           make lint
-      - name: Test code coverage
-        run: |
-          make test-coverage
-      - name: CodeClimate Code Coverage Test Reporter
-        # You may pin to the exact commit or the version.
-        # uses: xylabs/action-code-climate-test-reporter@79e542e6c82c5c48a50e885860eeed998467bbe5
-        uses: xylabs/action-code-climate-test-reporter@v1.0.0
+      - name: Run test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        # Add Code Climate secret key
+        env:
+          CC_TEST_REPORTER_ID: ${{ 6e1833aa96a15ec950d73c4462aec91a8cbf2ab38d40fa7460c4061b647870b5 }}
         with:
-          # The cc-test-report subcommand (with flags/arguments) to execute
-          subcommand: # default is help
-            upload-coverage
+          coverageCommand: make test-coverage
+          coverageLocations: ${{github.workplace}}/build/logs/clover.xml:clover
+          debug: true
