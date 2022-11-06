@@ -14,9 +14,12 @@ jobs:
         run: |
           pip install poetry
           make install
-      - name: Linter test
+      - name: Run linter
         run: |
           make lint
+      - name: Run tests
+        run: |
+          make test
       - name: Create reporter
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -27,6 +30,6 @@ jobs:
           make test-coverage
       - name: sending reporter
         env:
-          GITHUB_TOKEN: ${{ secrets.CC_TEST_REPORTER_ID }}
+          GITHUB_TOKEN: ${{ secrets.СС_TEST_REPORTER_ID }}
         run: |
           ./cc-test-reporter after-build -r "$GITHUB_TOKEN"
