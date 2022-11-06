@@ -17,11 +17,16 @@ jobs:
       - name: Linter test
         run: |
           make lint
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.7.4
-        if: github.ref_name == 'main'
+      - name: Create reporter
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+      - name: test
+        run: |
+          make test-cov
+      - name: sending reporter
         env:
-          CC_TEST_REPORTER_ID: 6e1833aa96a15ec950d73c4462aec91a8cbf2ab38d40fa7460c4061b647870b5
-        with:
-          coverageCommand: make test-coverage
-          debug: true
+          GITHUB_TOKEN: ${{ secrets.CC_TEST_REPORTER_ID }}
+        run: |
+          ./cc-test-reporter after-build -r "$GITHUB_TOKEN"
