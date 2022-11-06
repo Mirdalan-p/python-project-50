@@ -17,10 +17,20 @@ jobs:
         run: |
           pip install poetry
           make install
-      - name: Run linter and pytest
+      - name: Run linter
         run: |
           make lint
-      - name: Test & publish code coverage
+      - name: Test code coverage
         run: |
           make test-coverage
+      - name: format code coverage
+        uses: ./.github/actions/cc-test-reporter
+        with:
+          subcommand: "format-coverage -t lcov ./coverage/lcov.info"
+      - name: upload code coverage
+        uses: ./.github/actions/cc-test-reporter
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          subcommand: "upload-coverage"
 
