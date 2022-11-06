@@ -30,3 +30,4 @@ jobs:
         with:
           # The cc-test-report subcommand (with flags/arguments) to execute
           subcommand: # default is help
+            upload-coverage
