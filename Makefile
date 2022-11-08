@@ -16,7 +16,4 @@ test:
 	poetry run pytest
 	
 test-coverage:
-	poetry run pytest -vv
-
-coverage-report:
-	poetry run pytest --cov=src
+	poetry run pytest --cov
