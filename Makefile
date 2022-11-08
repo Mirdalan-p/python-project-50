@@ -17,3 +17,7 @@ test:
 	
 test-coverage:
 	poetry run pytest --cov
+
+coverage-report:
+	coverage run -m poetry run pytest --cov
+	coverage report
