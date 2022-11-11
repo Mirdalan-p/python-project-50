@@ -1,4 +1,4 @@
-import json
+from gendiff.scripts.parser import make_parse
 
 
 def data_type_check(value):
@@ -24,8 +24,8 @@ def value_comparison(value, value_1, value_2):
 
 
 def generate_diff(file_path1, file_path2):
-    first = json.load(open(file_path1))
-    second = json.load(open(file_path2))
+    first = make_parse(file_path1)
+    second = make_parse(file_path2)
     # Получаем список ключей, которые есть в обоих файлах, сортируем
     dict_keys = sorted(list(key_set(first) | key_set(second)))
     result = '{\n'
@@ -40,6 +40,6 @@ def generate_diff(file_path1, file_path2):
     return result + '}'
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(generate_diff(
-        './tests/fixtures/file1.json', './tests/fixtures/file2.json'))
+        'tests/fixtures/file3.yaml', 'tests/fixtures/file4.yaml'))
