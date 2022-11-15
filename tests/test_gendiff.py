@@ -13,3 +13,7 @@ def test_generate_diff_with_flat_json():
 def test_generate_diff_with_flat_yaml():
     assert generate_diff('tests/fixtures/file3.yaml', 'tests/fixtures/file4.yaml') == \
            get_result('tests/fixtures/output_1.txt')
+
+def test_generate_diff_with_recursive():
+    assert generate_diff('tests/fixtures/file1_recursive.json', 'tests/fixtures/file2_recursive.json') == \
+           get_result('tests/fixtures/output_recursive.txt')
