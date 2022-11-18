@@ -1,5 +1,8 @@
 import argparse
 from gendiff.scripts.make_diff import generate_diff
+from gendiff.scripts.stylish import make_stylish
+from gendiff.scripts.parser import make_parse
+from gendiff.scripts.get_diff import get_diff
 
 
 parser = argparse.ArgumentParser(
@@ -13,4 +16,7 @@ args = parser.parse_args()
 
 
 def main():
-    print(generate_diff(args.first_file, args.second_file))
+    data = (make_parse(args.first_file), make_parse(args.second_file))
+    print(generate_diff(data))
+    
+    print(make_stylish(generate_diff(data)))

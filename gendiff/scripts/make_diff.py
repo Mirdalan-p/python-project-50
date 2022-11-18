@@ -1,45 +1,25 @@
-from gendiff.scripts.parser import make_parse
-
-
-def data_type_check(value):
-    if isinstance(value, bool):
-        if value is None:
-            return 'null'
-        else:
-            return str(value).lower()
-    else:
-        return value
+from gendiff.scripts.get_diff import get_diff
 
 
 def key_set(source):
-    return ({x for x in source})
+    return ({x for x in source if x})
 
 
-def value_comparison(value, value_1, value_2):
-    if value_1[value] == value_2[value]:
-        return f"    {value}: {data_type_check(value_1[value])}\n"
-    else:
-        return f"  - {value}: {data_type_check(value_1[value])}\n"\
-            f"  + {value}: {data_type_check(value_2[value])}\n"
-
-
-def generate_diff(file_path1, file_path2):
-    first = make_parse(file_path1)
-    second = make_parse(file_path2)
-    # Получаем список ключей, которые есть в обоих файлах, сортируем
-    dict_keys = sorted(list(key_set(first) | key_set(second)))
-    result = '{\n'
-    for value in dict_keys:
-        if value in first and value not in second:
-            result += f"  - {value}: {data_type_check(first[value])}\n"
-        elif value in second and value not in first:
-            result += f"  + {value}: {data_type_check(second[value])}\n"
-        elif value in first and value in second:
-            result += value_comparison(value, first, second)
-
-    return result + '}'
-
-
-if __name__ == "__main__":
-    print(generate_diff(
-        'tests/fixtures/file3.yaml', 'tests/fixtures/file4.yaml'))
+def generate_diff(data):
+    first = data[0]
+    second = data[1]
+    keys = sorted(list(key_set(first) | key_set(second)))
+    output = []
+    for key in keys:
+        if first.get(key):
+            if not isinstance(first.get(key), dict):
+                old = first.get(key)
+                new = second.get(key)
+                value = (key, old, new,  get_diff((old, new), keys)) ## Диф по ключу(кортеж)
+                output.append(value)
+            elif isinstance(first.get(key), dict):
+                child = (first.get(key), second.get(key))
+                return generate_diff(child)
+        
+    return [('адын', 'щячло', 'попячсо', 'changed'), ('адын', 'щячло', 'попячсо', 'added'), ('адын', 'щячло', 'попячсо', 'deleted'), ('адын', 'щячло', 'попячсо', 'equal')]
+    
