@@ -16,6 +16,7 @@ def generate_diff(data):
     output = []
     for key in keys:
         if key in first:
+            print(key)
             if not isinstance(first[key], dict):
                 old = first.get(key)
                 new = second.get(key)
@@ -23,12 +24,11 @@ def generate_diff(data):
                 value = (key, old, new,  get_diff(new_data))
                 output.append(value)
             else:
-                if key in first and key in second:
-                    new_data = (first.get(key), second.get(key))
-                    return generate_diff(new_data)
-                else:
-                    value = (key, old, new,  get_diff(new_data))
-                    output.append(value)
+                old = first.get(key)
+                new = second.get(key)
+                new_data = (old, new)
+                return generate_diff(new_data)
+            
         else:
             old = first.get(key)
             new = second.get(key)
