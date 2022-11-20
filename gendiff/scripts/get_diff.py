@@ -3,9 +3,9 @@ def get_diff(data):
     if first:
         if first == second:
             return 'equal'
-        if first != second:
+        elif not second:
+            return 'deleted'
+        elif first != second:
             return 'changed'
-        if not second:
-            return 'added'
     else:
-        return 'deleted'
+        return 'added'

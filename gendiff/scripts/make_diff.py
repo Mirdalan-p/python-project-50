@@ -36,4 +36,5 @@ def generate_diff(data):
             new_data = (old, new)
             value = (key, old, new, get_diff(new_data))
             output.append(value)
+    print(output)
     return output
