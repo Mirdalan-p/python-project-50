@@ -2,24 +2,38 @@ from gendiff.scripts.get_diff import get_diff
 
 
 def key_set(source):
-    return ({x for x in source if x})
+    if source:
+        keys = list(source.keys())
+        return set(keys)
+    else:
+        return set([])
 
 
 def generate_diff(data):
     first = data[0]
     second = data[1]
     keys = sorted(list(key_set(first) | key_set(second)))
+    print(keys)
     output = []
     for key in keys:
-        if first.get(key):
-            if not isinstance(first.get(key), dict):
+        if key in first:
+            if not isinstance(first[key], dict):
                 old = first.get(key)
                 new = second.get(key)
-                value = (key, old, new,  get_diff((old, new), keys)) ## Диф по ключу(кортеж)
+                new_data = (old, new)
+                value = (key, old, new,  get_diff(new_data))
                 output.append(value)
-            elif isinstance(first.get(key), dict):
-                child = (first.get(key), second.get(key))
-                return generate_diff(child)
-        
-    return [('адын', 'щячло', 'попячсо', 'changed'), ('адын', 'щячло', 'попячсо', 'added'), ('адын', 'щячло', 'попячсо', 'deleted'), ('адын', 'щячло', 'попячсо', 'equal')]
-    
+            else:
+                if key in first and key in second:
+                    new_data = (first.get(key), second.get(key))
+                    return generate_diff(new_data)
+                else:
+                    value = (key, old, new,  get_diff(new_data))
+                    output.append(value)
+        else:
+            old = first.get(key)
+            new = second.get(key)
+            new_data = (old, new)
+            value = (key, old, new, get_diff(new_data))
+            output.append(value)
+    return output

@@ -1,4 +1,4 @@
-def get_diff(data, keys):
+def get_diff(data):
     first, second = data
     if first:
         if first == second:
