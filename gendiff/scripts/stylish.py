@@ -17,12 +17,11 @@ def make_stylish(data, indent=2):
             if diff == 'equal':
                 output += f"{(indent + 2) * ' '}{key}: {data_type_check(old)}\n"
             elif diff == 'changed':
-                output += f"{indent * ' '}- {key}: {data_type_check(old)}\n{indent * ' '}+ {key}: {data_type_check(new)}\n"
+                output += f"{indent * ' '}- {key}: {data_type_check(old)}\n{indent * ' '} {key}: {data_type_check(new)}\n"
             elif diff == 'deleted':
                 output += f"{indent * ' '}- {key}: {data_type_check(old)}\n"
             elif diff == 'added':
                 output += f"{indent * ' '}+ {key}: {data_type_check(new)}\n"
-        elif isinstance(key, list):
-            return make_stylish(key, indent + 2)
+    
     output += '}'
     return output
