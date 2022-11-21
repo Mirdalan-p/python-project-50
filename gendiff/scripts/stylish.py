@@ -12,16 +12,20 @@ def data_type_check(value):
 
 def make_stylish(data, indent=2):
     output = "{\n"
-    for key, old, new, diff in data:
-        if not isinstance(key, list):
-            if diff == 'equal':
-                output += f"{(indent + 2) * ' '}{key}: {data_type_check(old)}\n"
-            elif diff == 'changed':
-                output += f"{indent * ' '}- {key}: {data_type_check(old)}\n{indent * ' '} {key}: {data_type_check(new)}\n"
-            elif diff == 'deleted':
-                output += f"{indent * ' '}- {key}: {data_type_check(old)}\n"
-            elif diff == 'added':
-                output += f"{indent * ' '}+ {key}: {data_type_check(new)}\n"
-    
+    print(data)
+    for value in data:
+        print(value)
+        if not isinstance(value, list):
+            for key, old, new, diff in value:
+                if diff == 'equal':
+                    output += f"{(indent + 2) * ' '}{key}: {data_type_check(old)}\n"
+                elif diff == 'changed':
+                    output += f"{indent * ' '}- {key}: {data_type_check(old)}\n{indent * ' '}+ {key}: {data_type_check(new)}\n"
+                elif diff == 'deleted':
+                    output += f"{indent * ' '}- {key}: {data_type_check(old)}\n"
+                elif diff == 'added':
+                    output += f"{indent * ' '}+ {key}: {data_type_check(new)}\n"
+        else:
+            output += make_stylish(value, indent + 2)
     output += '}'
     return output

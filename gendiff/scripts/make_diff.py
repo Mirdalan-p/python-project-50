@@ -15,19 +15,19 @@ def generate_diff(data):
     keys = sorted(list(key_set(first) | key_set(second)))
     output = []
     for key in keys:
-        if key in first:
-            print(key)
-            if not isinstance(first[key], dict):
-                old = first.get(key)
-                new = second.get(key)
+        if key in first and key in second:
+            if isinstance(first[key], dict) and isinstance(second[key], dict):
+                old = first[key]
+                new = second[key]
+                new_data = (old, new)
+                value = (key, generate_diff(new_data), get_diff(new_data))
+                output.append(value)
+            else:
+                old = first[key]
+                new = second[key]
                 new_data = (old, new)
                 value = (key, old, new,  get_diff(new_data))
                 output.append(value)
-            else:
-                old = first.get(key)
-                new = second.get(key)
-                new_data = (old, new)
-                return generate_diff(new_data)
             
         else:
             old = first.get(key)
