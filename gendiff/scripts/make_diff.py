@@ -23,16 +23,16 @@ def generate_diff(data):
                 value = (key, generate_diff(new_data), get_diff(new_data))
                 output.append(value)
             else:
-                old = first[key]
-                new = second[key]
+                old = str(first[key])
+                new = str(second[key])
                 new_data = (old, new)
-                value = (key, old, new,  get_diff(new_data))
+                value = (key, new_data,  get_diff(new_data))
                 output.append(value)
             
         else:
             old = first.get(key)
             new = second.get(key)
             new_data = (old, new)
-            value = (key, old, new, get_diff(new_data))
+            value = (key, new_data, get_diff(new_data))
             output.append(value)
     return output
