@@ -1,30 +1,57 @@
 from gendiff.scripts.make_diff import generate_diff
+from gendiff.scripts.make_diff import data_type_check
+
+import itertools
 
 
-def data_type_check(value):
-    if value is "None":
-        return 'null'
+def is_dict(value, level, separator= '  '):
+    output =''
+    if isinstance(value, dict):
+        for key in value:
+            output += f"{separator * (level + 2)}{key}: {is_dict(value[key], level + 2)}\n"
+        return "{\n" + f"{output}{level * separator}" + "}"
     else:
-        return str(value).lower()
+        return value
 
 
-def make_stylish(data, indent=2):
-    output = "{\n"
-    print(data)
-    for value in data:
-        key, values, diff = value
-        if not isinstance(values, list):
-            old, new = values
-            if diff == 'equal':
-                output += f"{(indent + 2) * ' '}{key}: {data_type_check(old)}\n"
-            elif diff == 'changed':
-                output += f"{indent * ' '}- {key}: {data_type_check(old)}\n{indent * ' '}+ {key}: {data_type_check(new)}\n"
+def get_sign(data):
+    result = ()
+    if data == 'changed':
+        result = ('-', "+")
+    elif data == 'deleted':
+        result = ('-')
+    elif data == 'added':
+        result = ('+')
+    elif data == 'equal':
+        result = (' ')
+    i = iter(result)
+    return i
+
+
+def make_stylish(data, level=0, separator= '  '):
+    output = '{\n'
+    for element in data:
+        key, tree, diff = element
+        if not isinstance(tree, list):
+            sign = get_sign(diff)
+            old = tree[0]
+            new = tree[1]
+            if diff == 'added':
+                output += f"{separator * (level + 1)}{next(sign)} {key}: {is_dict(new, level + 2)}\n"
             elif diff == 'deleted':
-                output += f"{indent * ' '}- {key}: {data_type_check(old)}\n"
-            elif diff == 'added':
-                output += f"{indent * ' '}+ {key}: {data_type_check(new)}\n"
+                output += f"{separator * (level + 1)}{next(sign)} {key}: {is_dict(old, level + 2)}\n"
+            elif diff == 'equal':
+                output += f"{separator * (level + 1)}{next(sign)} {key}: {is_dict(old, level + 2)}\n"
+            elif diff == 'changed':
+                output += f"{separator * (level + 1)}{next(sign)} {key}: {is_dict(old, level + 2)}\n"\
+                    f"{separator * (level + 1)}{next(sign)} {key}: {is_dict(new, level)}\n"
+
         else:
-            key, result, diff = value
-            output += f"{indent * ' '}{key}: {make_stylish(result, indent + 2)}\n"
+            key, values, diff = element
+            sign = get_sign(diff)
+            output += f"{separator * (level + 1)}{next(sign)} {key}: {make_stylish(values, level + 2)}\n"
     
-    return output + '}'
+    
+    
+    output += level * separator + "}"
+    return output

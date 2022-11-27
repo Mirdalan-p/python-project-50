@@ -18,4 +18,4 @@ args = parser.parse_args()
 def main():
     data = (make_parse(args.first_file), make_parse(args.second_file))
     print(make_stylish(generate_diff(data)))
-    #print(generate_diff(data))
+    print(generate_diff(data))
