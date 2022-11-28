@@ -11,11 +11,11 @@ def key_set(source):
 
 def data_type_check(tree, key):
     if key in tree:
-        if tree[key] == None:
+        if tree[key] is None:
             return 'null'
-        elif tree[key] == True:
+        elif tree[key] is True:
             return 'true'
-        elif tree[key] == False:
+        elif tree[key] is False:
             return 'false'
         else:
             return tree[key]
