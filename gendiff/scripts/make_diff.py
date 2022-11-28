@@ -8,14 +8,20 @@ def key_set(source):
     else:
         return set([])
 
-def data_type_check(value):
-    if isinstance(value, dict):
-        return value
-    else:
-        if value is None:
-            return None
+
+def data_type_check(tree, key):
+    if key in tree:
+        if tree[key] == None:
+            return 'null'
+        elif tree[key] == True:
+            return 'true'
+        elif tree[key] == False:
+            return 'false'
         else:
-            return str(value).lower()
+            return tree[key]
+    else:
+        return None
+
 
 def generate_diff(data):
     first = data[0]
@@ -31,15 +37,15 @@ def generate_diff(data):
                 value = (key, generate_diff(new_data), 'equal')
                 output.append(value)
             else:
-                old = data_type_check(first[key])
-                new = data_type_check(second[key])
+                old = data_type_check(first, key)
+                new = data_type_check(second, key)
                 new_data = (old, new)
-                value = (key, new_data,  get_diff(new_data))
+                value = (key, new_data, get_diff(new_data))
                 output.append(value)
-            
+
         else:
-            old = data_type_check(first.get(key))
-            new = data_type_check(second.get(key))
+            old = data_type_check(first, key)
+            new = data_type_check(second, key)
             new_data = (old, new)
             value = (key, new_data, get_diff(new_data))
             output.append(value)

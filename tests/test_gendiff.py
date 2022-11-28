@@ -1,5 +1,11 @@
 from gendiff.scripts.make_diff import generate_diff
+from gendiff.scripts.stylish import make_stylish
+from gendiff.scripts.parser import make_parse
 
+
+json_flat = (make_parse('tests/fixtures/file1.json'), make_parse('tests/fixtures/file2.json'))
+flat_yaml = (make_parse('tests/fixtures/file3.yaml'), make_parse('tests/fixtures/file4.yaml'))
+yaml_recursive = (make_parse('tests/fixtures/file1_recursive.yaml'), make_parse('tests/fixtures/file2_recursive.yaml'))
 
 
 def get_result(file):
@@ -7,13 +13,13 @@ def get_result(file):
         return expected_result.read()
 
 def test_generate_diff_with_flat_json():
-    assert generate_diff('tests/fixtures/file1.json', 'tests/fixtures/file2.json') == \
+    assert make_stylish(generate_diff(json_flat)) == \
            get_result('tests/fixtures/output_1.txt')
 
 def test_generate_diff_with_flat_yaml():
-    assert generate_diff('tests/fixtures/file3.yaml', 'tests/fixtures/file4.yaml') == \
+    assert make_stylish(generate_diff(flat_yaml)) == \
            get_result('tests/fixtures/output_1.txt')
 
 def test_generate_diff_with_recursive():
-    assert generate_diff('tests/fixtures/file1_recursive.json', 'tests/fixtures/file2_recursive.json') == \
+    assert make_stylish(generate_diff(yaml_recursive)) == \
            get_result('tests/fixtures/output_recursive.txt')
