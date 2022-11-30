@@ -36,7 +36,6 @@ def get_string(data, level, diff):
 
 def make_stylish(data, level=0):
     output = '{\n'
-    print(data)
     for element in data:
         key, tree, diff = element
         if not isinstance(tree, list):

@@ -1,6 +1,6 @@
 import argparse
 from gendiff.scripts.make_diff import generate_diff
-from gendiff.scripts.stylish import make_stylish
+from gendiff.formatters.get_stylish import make_stylish
 from gendiff.scripts.parser import make_parse
 
 

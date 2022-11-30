@@ -20,6 +20,10 @@ def test_generate_diff_with_flat_yaml():
     assert make_stylish(generate_diff(flat_yaml)) == \
            get_result('tests/fixtures/output_1.txt')
 
-def test_generate_diff_with_recursive():
+def test_generate_diff_with_stylish():
     assert make_stylish(generate_diff(yaml_recursive)) == \
-           get_result('tests/fixtures/output_recursive.txt')
+           get_result('tests/fixtures/output_stylish.txt')
+
+def test_generate_diff_with_plain():
+    assert make_plain(generate_diff(yaml_recursive)) == \
+           get_result('tests/fixtures/output_plain.txt')
