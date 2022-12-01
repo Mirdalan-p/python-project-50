@@ -1,6 +1,7 @@
 import argparse
 from gendiff.scripts.make_diff import generate_diff
 from gendiff.formatters.get_stylish import make_stylish
+from gendiff.formatters.get_plain import make_plain
 from gendiff.scripts.parser import make_parse
 
 
@@ -18,4 +19,4 @@ args = parser.parse_args()
 
 def main(formatter="stylish"):
     data = (make_parse(args.first_file), make_parse(args.second_file))
-    print(make_stylish(generate_diff(data)))
+    print(make_plain(generate_diff(data)))

@@ -22,8 +22,11 @@ project-install:
 	poetry build
 	python3 -m pip install --user dist/*.whl --force-reinstall
 
-try:
-	gendiff /home/mirdalan/hexlet-projects/python-project-50/tests/fixtures/file1_recursive.yaml /home/mirdalan/hexlet-projects/python-project-50/tests/fixtures/file2_recursive.yaml
+stylish-complex:
+	gendiff tests/fixtures/file1_recursive.yaml tests/fixtures/file2_recursive.yaml
 
-try2:
-	gendiff /home/mirdalan/hexlet-projects/python-project-50/tests/fixtures/file1.json /home/mirdalan/hexlet-projects/python-project-50/tests/fixtures/file2.json
+stylish-flat:
+	gendiff tests/fixtures/file1.json tests/fixtures/file2.json
+
+plain:
+	gendiff -f plain tests/fixtures/file1_recursive.yaml tests/fixtures/file2_recursive.yaml
