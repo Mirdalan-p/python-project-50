@@ -11,3 +11,6 @@
 
 ### Stylish format with complex values:
 [![asciicast](https://asciinema.org/a/541604.svg)](https://asciinema.org/a/541604)
+
+### Plain format with complex values:
+[![asciicast](https://asciinema.org/a/542192.svg)](https://asciinema.org/a/542192)
