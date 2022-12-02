@@ -26,5 +26,5 @@ def test_generate_diff_with_stylish():
            get_result('tests/fixtures/output_stylish.txt')
 
 def test_generate_diff_with_plain():
-    assert make_plain(generate_diff(yaml_recursive)) == \
+    assert make_plain(generate_diff(yaml_recursive)).strip() == \
            get_result('tests/fixtures/output_plain.txt')

@@ -11,12 +11,12 @@ def make_string(data):  # Сборка строки в зависимости о
     values = data[1]
     diff = data[2]
     if diff == 'added':
-        return f" was added with value: {complex_check(values[1])}\n"
+        return f" was added with value: {complex_check(values[1])}"
     elif diff == 'deleted':
-        return " was removed\n"
+        return " was removed"
     elif diff == 'changed':
         return f" was updated. From {complex_check(values[0])}"\
-            f" to {complex_check(values[1])}\n"
+            f" to {complex_check(values[1])}"
 
 
 def make_plain(tree, path=''):
@@ -27,6 +27,6 @@ def make_plain(tree, path=''):
             output += make_plain(values, path + f"{key}.")
         else:
             if diff != 'equal':
-                output += f"Property '{path}{key}'{make_string(element)}"
+                output += '\n' + f"Property '{path}{key}'{make_string(element)}"
 
     return output
