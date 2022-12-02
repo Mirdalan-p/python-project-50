@@ -1,37 +1,32 @@
-
-def make_path(tree):
-    return ('.'.join(tree))
-
-def complex_check(value):
-    if value is 'null' or value is 'true' or value is 'false':
+def complex_check(value):  # Проверка на вложенность
+    if value == 'null' or value == 'true' or value == 'false':
         return value
     elif isinstance(value, dict):
         return '[complex value]'
     else:
         return f"'{value}'"
 
-def make_string(data):
+
+def make_string(data):  # Сборка строки в зависимости от значения дифа
     values = data[1]
     diff = data[2]
     if diff == 'added':
         return f" was added with value: {complex_check(values[1])}\n"
     elif diff == 'deleted':
-        return f" was removed\n"
+        return " was removed\n"
     elif diff == 'changed':
-        return f" was updated from {complex_check(values[0])} to {complex_check(values[1])}\n"
+        return f" was updated. From {complex_check(values[0])}"\
+            f" to {complex_check(values[1])}\n"
 
-def make_plain(tree, path= None):
+
+def make_plain(tree, path=''):
     output = ''
-    if path == None:
-        path = []
     for element in tree:
         key, values, diff = element
-        if diff == 'equal':
-            if isinstance(values, list):
-                output += make_plain(values, [key])
-            else:
-                output += f"Property {make_path(key)}{make_string(element)}"
+        if isinstance(values, list):
+            output += make_plain(values, path + f"{key}.")
         else:
-            output += f"Property {make_path(key)}{make_string(element)}"
+            if diff != 'equal':
+                output += f"Property '{path}{key}'{make_string(element)}"
 
     return output
