@@ -6,6 +6,7 @@
 <a href="https://codeclimate.com/github/Mirdalan-p/python-project-50/maintainability"><img src="https://api.codeclimate.com/v1/badges/dc2ccd125d1ae66db4aa/maintainability" /></a>
 <a href="https://codeclimate.com/github/Mirdalan-p/python-project-50/test_coverage"><img src="https://api.codeclimate.com/v1/badges/dc2ccd125d1ae66db4aa/test_coverage" /></a>
 
+
 ### Stylish format with flat json:
 [![asciicast](https://asciinema.org/a/537316.svg)](https://asciinema.org/a/537316)
 
@@ -14,3 +15,6 @@
 
 ### Plain format with complex values:
 [![asciicast](https://asciinema.org/a/542192.svg)](https://asciinema.org/a/542192)
+
+### Json format:
+[![asciicast](https://asciinema.org/a/542348.svg)](https://asciinema.org/a/542348)
