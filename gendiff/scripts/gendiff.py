@@ -3,7 +3,7 @@ from gendiff.scripts.make_diff import generate_diff
 from gendiff.formatters.get_stylish import make_stylish
 from gendiff.formatters.get_plain import make_plain
 from gendiff.scripts.parser import make_parse
-
+from gendiff.formatters.get_json import make_json
 
 parser = argparse.ArgumentParser(
     description='Compares two configuration files and shows a difference.')
@@ -22,5 +22,7 @@ def main(formatter='stylish'):
     formatter = args.format
     if formatter == 'plain':
         print(make_plain(generate_diff(data)))
+    if formatter == 'json':
+        print(make_json(generate_diff(data)))
     else:
         print(make_stylish(generate_diff(data)))
