@@ -34,7 +34,7 @@ def get_tree(data):
                 old = first[key]
                 new = second[key]
                 new_data = (old, new)
-                value = (key, generate_diff(new_data), 'equal')
+                value = (key, get_tree(new_data), 'equal')
                 output.append(value)
             else:
                 old = data_type_check(first, key)

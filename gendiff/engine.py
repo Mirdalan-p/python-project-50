@@ -11,4 +11,3 @@ def generate_diff(filepath_1, filepath_2, formatter):
         print(get_json.make_json(get_tree(data)))
     elif formatter == 'stylish':
         print(get_stylish.make_stylish(get_tree(data)))
-

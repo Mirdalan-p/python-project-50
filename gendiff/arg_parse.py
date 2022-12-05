@@ -7,6 +7,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument('-f', '--format',
                     dest="format",
                     choices=['stylish', 'plain', 'json'],
+                    default="stylish",
                     help='set format of output')
 
 parser.add_argument('first_file')
@@ -18,4 +19,7 @@ def main():
     first = make_parse(args.first_file)
     second = make_parse(args.second_file)
     formatter = args.format
-    return generate_diff(first, second, formatter='stylish')
+    if formatter != 'plain' or formatter != 'json':
+        return generate_diff(first, second, 'stylish')
+    else:
+        return generate_diff(first, second, formatter)
