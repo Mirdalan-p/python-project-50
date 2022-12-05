@@ -1,4 +1,4 @@
-from gendiff.scripts.get_diff import get_diff
+from gendiff.scripts.get_diff import get_difference
 
 
 def key_set(source):
@@ -40,13 +40,13 @@ def generate_diff(data):
                 old = data_type_check(first, key)
                 new = data_type_check(second, key)
                 new_data = (old, new)
-                value = (key, new_data, get_diff(new_data))
+                value = (key, new_data, get_difference(new_data))
                 output.append(value)
 
         else:
             old = data_type_check(first, key)
             new = data_type_check(second, key)
             new_data = (old, new)
-            value = (key, new_data, get_diff(new_data))
+            value = (key, new_data, get_difference(new_data))
             output.append(value)
     return output

@@ -22,15 +22,4 @@ project-install:
 	poetry build
 	python3 -m pip install --user dist/*.whl --force-reinstall
 
-stylish-complex:
-	gendiff tests/fixtures/file1_recursive.yaml tests/fixtures/file2_recursive.yaml
-
-stylish-flat:
-	gendiff tests/fixtures/file1.json tests/fixtures/file2.json
-
-json: 
-	gendiff -f json tests/fixtures/file1_recursive.yaml tests/fixtures/file2_recursive.yaml
-
-plain:
-	gendiff -f plain tests/fixtures/file1_recursive.yaml tests/fixtures/file2_recursive.yaml
 
