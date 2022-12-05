@@ -22,7 +22,7 @@ def main(formatter='stylish'):
     formatter = args.format
     if formatter == 'plain':
         print(make_plain(generate_diff(data)))
-    if formatter == 'json':
+    elif formatter == 'json':
         print(make_json(generate_diff(data)))
     else:
         print(make_stylish(generate_diff(data)))
