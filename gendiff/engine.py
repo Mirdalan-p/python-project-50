@@ -1,28 +1,14 @@
-import argparse
-from gendiff.scripts.make_diff import generate_diff
-from gendiff.formatters.get_stylish import make_stylish
-from gendiff.formatters.get_plain import make_plain
 from gendiff.scripts.parser import make_parse
-from gendiff.formatters.get_json import make_json
-
-parser = argparse.ArgumentParser(
-    description='Compares two configuration files and shows a difference.')
-parser.add_argument('-f', '--format',
-                    dest="format",
-                    choices=['stylish', 'plain', 'json'],
-                    help='set format of output')
-
-parser.add_argument('first_file')
-parser.add_argument("second_file")
-args = parser.parse_args()
+from gendiff.formatters import get_plain, get_json, get_stylish
+from gendiff.scripts.make_diff import get_tree
 
 
-def main(formatter='stylish'):
-    data = (make_parse(args.first_file), make_parse(args.second_file))
-    formatter = args.format
+def generate_diff(filepath_1, filepath_2, formatter):
+    data = (make_parse(filepath_1), make_parse(filepath_2))
     if formatter == 'plain':
-        print(make_plain(generate_diff(data)))
+        print(get_plain.make_plain(get_tree(data)))
     elif formatter == 'json':
-        print(make_json(generate_diff(data)))
-    else:
-        print(make_stylish(generate_diff(data)))
+        print(get_json.make_json(get_tree(data)))
+    elif formatter == 'stylish':
+        print(get_stylish.make_stylish(get_tree(data)))
+

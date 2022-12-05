@@ -23,7 +23,7 @@ def data_type_check(tree, key):
         return None
 
 
-def generate_diff(data):
+def get_tree(data):
     first = data[0]
     second = data[1]
     keys = sorted(list(key_set(first) | key_set(second)))
