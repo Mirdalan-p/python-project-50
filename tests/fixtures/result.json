@@ -8,7 +8,9 @@
             "deleted": 200
         },
         "setting3": {
-            "added": "null",
+            "added": {
+                "key": "value"
+            },
             "deleted": "true"
         },
         "setting4": {
@@ -23,7 +25,7 @@
             "doge": {
                 "wow": {
                     "added": "so much",
-                    "deleted": ""
+                    "deleted": "too much"
                 }
             },
             "key": "value",
@@ -61,6 +63,39 @@
                 }
             },
             "fee": 100500
+        }
+    },
+    "group4": {
+        "default": {
+            "added": "",
+            "deleted": "null"
+        },
+        "foo": {
+            "added": "null",
+            "deleted": 0
+        },
+        "isNested": {
+            "added": "none",
+            "deleted": "false"
+        },
+        "key": {
+            "added": "false"
+        },
+        "nest": {
+            "bar": {
+                "added": 0,
+                "deleted": ""
+            },
+            "isNested": {
+                "deleted": "true"
+            }
+        },
+        "someKey": {
+            "added": "true"
+        },
+        "type": {
+            "added": "bar",
+            "deleted": "bas"
         }
     }
 }

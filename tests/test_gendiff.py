@@ -17,7 +17,7 @@ def test_generate_diff_json():
     assert generate_diff(json_[0], json_[1], 'plain') == \
            get_result('tests/fixtures/result_plain')
     assert generate_diff(json_[0], json_[1], 'json') == \
-           get_result('tests/fixtures/result_json')
+           get_result('tests/fixtures/result.json')
 
 
 def test_generate_diff_yaml():
@@ -26,7 +26,7 @@ def test_generate_diff_yaml():
     assert generate_diff(yaml_[0], yaml_[1], 'plain') == \
            get_result('tests/fixtures/result_plain')
     assert generate_diff(yaml_[0], yaml_[1], 'json') == \
-           get_result('tests/fixtures/result_json')
+           get_result('tests/fixtures/result.json')
 
 def test_generate_diff_mixed():
     assert generate_diff(mixed[0], mixed[1], 'stylish') == \
@@ -34,4 +34,4 @@ def test_generate_diff_mixed():
     assert generate_diff(mixed[0], mixed[1], 'plain') == \
            get_result('tests/fixtures/result_plain')
     assert generate_diff(mixed[0], mixed[1], 'json') == \
-           get_result('tests/fixtures/result_json')
+           get_result('tests/fixtures/result.json')
