@@ -1,35 +1,37 @@
-from gendiff.scripts.make_diff import generate_diff
-from gendiff.formatters.get_stylish import make_stylish
-from gendiff.formatters.get_plain import make_plain
-from gendiff.formatters.get_json import make_json
-from gendiff.scripts.parser import make_parse
+from gendiff.engine import generate_diff
 
 
-json_flat = (make_parse('tests/fixtures/file1.json'), make_parse('tests/fixtures/file2.json'))
-flat_yaml = (make_parse('tests/fixtures/file3.yaml'), make_parse('tests/fixtures/file4.yaml'))
-yaml_recursive = (make_parse('tests/fixtures/file1_recursive.yaml'), make_parse('tests/fixtures/file2_recursive.yaml'))
+
+json_ = ('tests/fixtures/file1.json', 'tests/fixtures/file2.json')
+yaml_ = ('tests/fixtures/file1.yml', 'tests/fixtures/file2.yml')
+mixed = ('tests/fixtures/file1.json', 'tests/fixtures/file2.yml')
 
 
 def get_result(file):
     with open(file) as expected_result:
         return expected_result.read()
 
-def test_generate_diff_with_flat_json():
-    assert make_stylish(generate_diff(json_flat)) == \
-           get_result('tests/fixtures/output_1.txt')
+def test_generate_diff_json():
+    assert generate_diff(json_[0], json_[1], 'stylish') == \
+           get_result('tests/fixtures/result_stylish')
+    assert generate_diff(json_[0], json_[1], 'plain') == \
+           get_result('tests/fixtures/result_plain')
+    assert generate_diff(json_[0], json_[1], 'json') == \
+           get_result('tests/fixtures/result_json')
 
-def test_stylish():
-    assert make_stylish(generate_diff(json_flat)) == \
-           get_result('tests/fixtures/output_1.txt')
-    assert make_stylish(generate_diff(flat_yaml)) == \
-           get_result('tests/fixtures/output_1.txt')
-    assert make_stylish(generate_diff(yaml_recursive)) == \
-           get_result('tests/fixtures/output_stylish.txt')
 
-def test_plain():
-    assert make_plain(generate_diff(yaml_recursive)).strip() == \
-           get_result('tests/fixtures/output_plain.txt')
+def test_generate_diff_yaml():
+    assert generate_diff(yaml_[0], yaml_[1], 'stylish') == \
+           get_result('tests/fixtures/result_stylish')
+    assert generate_diff(yaml_[0], yaml_[1], 'plain') == \
+           get_result('tests/fixtures/result_plain')
+    assert generate_diff(yaml_[0], yaml_[1], 'json') == \
+           get_result('tests/fixtures/result_json')
 
-def test_json_formatter():
-    assert make_json(generate_diff(yaml_recursive)).strip() == \
-           get_result('tests/fixtures/output.json')
+def test_generate_diff_mixed():
+    assert generate_diff(mixed[0], mixed[1], 'stylish') == \
+           get_result('tests/fixtures/result_stylish')
+    assert generate_diff(mixed[0], mixed[1], 'plain') == \
+           get_result('tests/fixtures/result_plain')
+    assert generate_diff(mixed[0], mixed[1], 'json') == \
+           get_result('tests/fixtures/result_json')
