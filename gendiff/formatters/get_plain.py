@@ -1,5 +1,6 @@
 def complex_check(value):  # Проверка на вложенность
-    if value == 'null' or value == 'true' or value == 'false' or isinstance(value, int):
+    bools_ = ['null', 'true', 'false']
+    if value in bools_ or isinstance(value, int):
         return value
     elif isinstance(value, dict):
         return '[complex value]'
@@ -27,7 +28,8 @@ def make_output(tree, path=''):
             output += make_output(values, path + f"{key}.")
         else:
             if diff != 'equal':
-                output += '\n' + f"Property '{path}{key}'{make_string(element)}"
+                output += '\n' + f"Property '{path}{key}'"\
+                    f"{make_string(element)}"
 
     return output
 
