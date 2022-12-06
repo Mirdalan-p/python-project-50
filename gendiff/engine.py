@@ -1,8 +1,6 @@
 from gendiff.scripts.parser import make_parse
 from gendiff.formatters import get_plain, get_json, get_stylish
 from gendiff.scripts.make_diff import get_tree
-from gendiff.arg_parse import parse_args
-
 
 
 def generate_diff(filepath_1, filepath_2, formatter):
@@ -13,4 +11,3 @@ def generate_diff(filepath_1, filepath_2, formatter):
         return get_json.make_json(get_tree(data))
     elif formatter == 'stylish':
         return get_stylish.make_stylish(get_tree(data))
-
