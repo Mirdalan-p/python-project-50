@@ -1,5 +1,6 @@
 def complex_check(value):  # Проверка на вложенность
-    if value == 'null' or value == 'true' or value == 'false':
+    bools_ = ['null', 'true', 'false']
+    if value in bools_ or isinstance(value, int):
         return value
     elif isinstance(value, dict):
         return '[complex value]'
@@ -15,18 +16,23 @@ def make_string(data):  # Сборка строки в зависимости о
     elif diff == 'deleted':
         return " was removed"
     elif diff == 'changed':
-        return f" was updated. From {complex_check(values[0])}"\
-            f" to {complex_check(values[1])}"
+        return f" was updated. From {complex_check(values[0])} to "\
+            f"{complex_check(values[1])}"
 
 
-def make_plain(tree, path=''):
+def make_output(tree, path=''):
     output = ''
     for element in tree:
         key, values, diff = element
         if isinstance(values, list):
-            output += make_plain(values, path + f"{key}.")
+            output += make_output(values, path + f"{key}.")
         else:
             if diff != 'equal':
-                output += '\n' + f"Property '{path}{key}'{make_string(element)}"
+                output += '\n' + f"Property '{path}{key}'"\
+                    f"{make_string(element)}"
 
     return output
+
+
+def make_plain(tree):
+    return make_output(tree).strip()

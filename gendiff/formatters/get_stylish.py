@@ -9,7 +9,7 @@ def is_dict(value, level):
         for key in value:
             output += f"{SEPARATOR * (level + 2)}{key}:"\
                 f" {is_dict(value[key], level + 2)}\n"
-        return "{\n" + f"{output}{level * SEPARATOR}" + "}"
+        return "{\n" + f"{output}{(level) * SEPARATOR}" + "}"
     else:
         return value
 
@@ -30,7 +30,7 @@ def get_string(data, level, diff):
         output += f"{SEPARATOR * (level + 1)}{next(sign)}"\
             f" {key}: {is_dict(old, level + 2)}\n"\
             f"{SEPARATOR * (level + 1)}{next(sign)}"\
-            f" {key}: {is_dict(new, level)}\n"
+            f" {key}: {is_dict(new, level + 2)}\n"
     return output
 
 
