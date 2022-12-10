@@ -1,5 +1,5 @@
 from gendiff.formatters import get_plain, get_json, get_stylish
-from gendiff.scripts.make_diff import get_tree
+from gendiff.make_diff import get_tree
 
 
 def make_formatted(data, formatter):

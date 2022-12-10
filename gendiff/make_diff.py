@@ -1,4 +1,5 @@
 def get_difference(data):
+    # Узнаём, изменился ли ключ, или значения по ключу
     first, second = data
 
     if first == second:
@@ -12,6 +13,7 @@ def get_difference(data):
 
 
 def key_set(source):
+    # Получаем список общих ключей для двух файлов
     if source:
         keys = list(source.keys())
         return set(keys)
@@ -20,6 +22,7 @@ def key_set(source):
 
 
 def data_type_check(tree, key):
+    # Проверка на булева значения
     if key in tree:
         if tree[key] is None:
             return 'null'
