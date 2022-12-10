@@ -1,6 +1,18 @@
-from gendiff.scripts.get_diff import get_sign
-
 SEPARATOR = '  '
+
+
+def get_sign(data):
+    result = ()
+    if data == 'changed':
+        result = ('-', "+")
+    elif data == 'deleted':
+        result = ('-')
+    elif data == 'added':
+        result = ('+')
+    elif data == 'equal':
+        result = (' ')
+    i = iter(result)
+    return i
 
 
 def is_dict(value, level):
