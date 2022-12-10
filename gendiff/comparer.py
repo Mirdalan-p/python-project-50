@@ -1,4 +1,4 @@
-from gendiff.scripts.parser import make_parse
+from gendiff.parser import make_parse
 from gendiff.formatters.formatter import make_formatted
 
 
