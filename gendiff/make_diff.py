@@ -12,15 +12,6 @@ def get_difference(data):
         return 'changed'
 
 
-def key_set(source):
-    # Получаем список общих ключей для двух файлов
-    if source:
-        keys = list(source.keys())
-        return set(keys)
-    else:
-        return set([])
-
-
 def data_type_check(tree, key):
     # Проверка на булева значения
     if key in tree:
@@ -39,7 +30,7 @@ def data_type_check(tree, key):
 def get_tree(data):
     first = data[0]
     second = data[1]
-    keys = sorted(list(key_set(first) | key_set(second)))
+    keys = sorted(list({x for x in first if x} | {y for y in second if y})) # Список общих ключей
     output = []
     for key in keys:
         if key in first and key in second:
