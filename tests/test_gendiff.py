@@ -1,4 +1,4 @@
-from gendiff.engine import generate_diff
+from gendiff.comparer import generate_diff
 
 
 json_ = ('tests/fixtures/file1.json', 'tests/fixtures/file2.json')
