@@ -11,7 +11,7 @@ def read_file(file):
         return expected_result.read()
 
 
-@pytest.mark.parametrize("first,second", [(json_[0], yaml_[1]),(json_[0], json_[1]), (yaml_[0], yaml_[1])])
+@pytest.mark.parametrize("first,second", [(json_[0], yaml_[1]), (json_[0], json_[1]), (yaml_[0], yaml_[1])])
 def test_generate_diff(first, second):
     assert generate_diff(first, second) == \
         read_file(('tests/fixtures/result_stylish'))
@@ -19,5 +19,5 @@ def test_generate_diff(first, second):
         read_file(('tests/fixtures/result.json'))
     assert generate_diff(first, second, 'plain') == \
         read_file(('tests/fixtures/result_plain'))
-    assert generate_diff(first,first) != \
+    assert generate_diff(first, first) != \
         read_file(('tests/fixtures/result_stylish'))
