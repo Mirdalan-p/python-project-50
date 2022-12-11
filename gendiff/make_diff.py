@@ -1,30 +1,33 @@
 def get_difference(data):
     # Узнаём, изменился ли ключ, или значения по ключу
     first, second = data
-
+    diff = ''
     if first == second:
-        return 'equal'
+        diff = 'equal'
     elif first and second is None:
-        return 'deleted'
+        diff = 'deleted'
     elif first is None and second:
-        return 'added'
+        diff = 'added'
     elif first != second:
-        return 'changed'
+        diff = 'changed'
+    return diff
 
 
 def data_type_check(tree, key):
     # Проверка на булева значения
+    value = ''
     if key in tree:
         if tree[key] is None:
-            return 'null'
+            value = 'null'
         elif tree[key] is True:
-            return 'true'
+            value = 'true'
         elif tree[key] is False:
-            return 'false'
+            value = 'false'
         else:
-            return tree[key]
+            value = tree[key]
     else:
-        return None
+        value = None
+    return value
 
 
 def get_tree(data):
