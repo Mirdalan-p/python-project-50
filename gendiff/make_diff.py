@@ -37,6 +37,9 @@ def get_tree(data):
         {x for x in first if x} | {y for y in second if y}))
     output = []
     for key in keys:
+        old = data_type_check(first, key)
+        new = data_type_check(second, key)
+        new_data = (old, new)
         if key in first and key in second:
             if isinstance(first[key], dict) and isinstance(second[key], dict):
                 old = first[key]
@@ -45,16 +48,10 @@ def get_tree(data):
                 value = (key, get_tree(new_data), 'equal')
                 output.append(value)
             else:
-                old = data_type_check(first, key)
-                new = data_type_check(second, key)
-                new_data = (old, new)
                 value = (key, new_data, get_difference(new_data))
                 output.append(value)
 
         else:
-            old = data_type_check(first, key)
-            new = data_type_check(second, key)
-            new_data = (old, new)
             value = (key, new_data, get_difference(new_data))
             output.append(value)
     return output
