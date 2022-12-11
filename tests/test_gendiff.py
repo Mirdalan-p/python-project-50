@@ -19,3 +19,5 @@ def test_generate_diff(first, second):
         read_file(('tests/fixtures/result.json'))
     assert generate_diff(first, second, 'plain') == \
         read_file(('tests/fixtures/result_plain'))
+    assert generate_diff(first,first) != \
+        read_file(('tests/fixtures/result_stylish'))
