@@ -1,32 +1,40 @@
-from gendiff.scripts.get_diff import get_difference
-
-
-def key_set(source):
-    if source:
-        keys = list(source.keys())
-        return set(keys)
-    else:
-        return set([])
+def get_difference(data):
+    # Узнаём, изменился ли ключ, или значения по ключу
+    first, second = data
+    diff = ''
+    if first == second:
+        diff = 'equal'
+    elif first and second is None:
+        diff = 'deleted'
+    elif first is None and second:
+        diff = 'added'
+    elif first != second:
+        diff = 'changed'
+    return diff
 
 
 def data_type_check(tree, key):
+    # Проверка на булева значения
+    value = ''
     if key in tree:
         if tree[key] is None:
-            return 'null'
+            value = 'null'
         elif tree[key] is True:
-            return 'true'
+            value = 'true'
         elif tree[key] is False:
-            return 'false'
+            value = 'false'
         else:
-            return tree[key]
+            value = tree[key]
     else:
-        return None
+        value = None
+    return value
 
 
 def get_tree(data):
     first = data[0]
     second = data[1]
-    keys = sorted(list(key_set(first) | key_set(second)))
+    keys = sorted(list(
+        {x for x in first if x} | {y for y in second if y}))
     output = []
     for key in keys:
         if key in first and key in second:

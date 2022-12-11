@@ -1,3 +1,8 @@
 gendiff/_pycache_
 gendiff/scripts/__pycache__
+gendiff/__pycache__/
+gendiff/formatters/__pycache__/
+tests/__pycache__/
+.coverage
+coverage.xml
 dist
