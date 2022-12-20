@@ -1,5 +1,4 @@
 def get_difference(data):
-    # Узнаём, изменился ли ключ, или значения по ключу
     first, second = data
     diff = ''
     if first == second:
@@ -14,7 +13,6 @@ def get_difference(data):
 
 
 def data_type_check(tree, key):
-    # Проверка на булева значения
     value = ''
     if key in tree:
         if tree[key] is None:
